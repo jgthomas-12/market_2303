@@ -33,7 +33,17 @@ class Market
       end
       names
     end.flatten
-    items
+    items.uniq.sort!
+  end
+
+  def total_inventory
+    total_inventory = {}
+    vendors.map do |vendor|
+      vendor.inventory.find_all do |item|
+        total_inventory[item[0].name] = item[1]
+      end
+   end
+   total_inventory
   end
 
 end
