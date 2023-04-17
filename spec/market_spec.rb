@@ -99,23 +99,56 @@ RSpec.describe Market do
 
   describe "#sorted_item_list" do
     # returns an array of all items in stock (all vendors) sorted alphabetically, no duplicates
-    it "returns returns an array of one vendor's item list sorted alphabetically by name" do
+    it "returns an array of one vendor's item list sorted alphabetically by name" do
       @vendor1.stock(@item1, 35)
       @vendor1.stock(@item2, 7)
       @market.add_vendor(@vendor1)
       expect(@market.sorted_items_list).to eq(["Peach", "Tomato"])
     end
+
+    it "returns an array of all vendor's item list sorted alphabetically by name" do
+      @vendor1.stock(@item1, 35)
+      @vendor1.stock(@item2, 7)
+      @vendor2.stock(@item4, 50)
+      @vendor2.stock(@item3, 25)
+      @vendor3.stock(@item1, 65)
+      @market.add_vendor(@vendor1)
+      @market.add_vendor(@vendor2)
+      @market.add_vendor(@vendor3)
+      expect(@market.sorted_items_list).to eq(["Banana Nice Cream", "Peach", "Peach-Raspberry Nice Cream", "Tomato"])
+    end
   end
 
   describe "#total_inventory" do
-    it "can calculate total inventory of market" do
+  # Reports the quantities of all items sold at the market.
+  # it should return a hash with items as keys and hashes as values
+    it "can calculate total inventory of one vendor" do
+      @vendor1.stock(@item1, 35)
+      @vendor1.stock(@item2, 7)
+      @market.add_vendor(@vendor1)
+
+      result = {
+        "Peach" => 35,
+        "Tomato" => 7
+      }
+
+      expect(@market.total_inventory).to eq(result)
 
     end
   end
 
   describe "#overstocked_items" do
-    it "" do
+    xit "" do
+      @vendor1.stock(@item1, 35)
+      @vendor1.stock(@item2, 7)
+      @vendor2.stock(@item4, 50)
+      @vendor2.stock(@item3, 25)
+      @vendor3.stock(@item1, 65)
+      @market.add_vendor(@vendor1)
+      @market.add_vendor(@vendor2)
+      @market.add_vendor(@vendor3)
 
+      expect(@market.total_inventory).to eq()
     end
   end
 
