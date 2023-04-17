@@ -24,11 +24,11 @@ class Vendor
   end
 
   def potential_revenue
-    one = @inventory.map do |item|
+    pot_revenue = @inventory.map do |item|
       item_price_float = item[0].price.delete("$").to_f
       pot_rev = item[1] * item_price_float
     end
-    one.sum
+    pot_revenue.sum
   end
 
 end
