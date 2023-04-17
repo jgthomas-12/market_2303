@@ -76,17 +76,20 @@ RSpec.describe Vendor do
 
       @vendor1.stock(@item1, 35)
       @vendor1.stock(@item2, 7)
-  
-      # @market.add_vendor(@vendor1)
-      # expect(@market.vendors_that_sell(@item1)).to eq([@vendor1])
+
+      expect(@vendor1.potential_revenue).to eq(29.75)
     end
 
-    xit "can return all vendor's that sell a specific item" do
+    it "can return all vendor's that sell a specific item" do
       @vendor1.stock(@item1, 35)
       @vendor1.stock(@item2, 7)
       @vendor2.stock(@item4, 50)
       @vendor2.stock(@item3, 25)
       @vendor3.stock(@item1, 65)
+
+      expect(@vendor1.potential_revenue).to eq(29.75)
+      expect(@vendor2.potential_revenue).to eq(345.00)
+      expect(@vendor3.potential_revenue).to eq(48.75)
     end
   end
 end
