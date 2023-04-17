@@ -9,7 +9,7 @@ class Vendor
 
   def check_stock(item)
     if @inventory.include?(item)
-      @inventory[item] 
+      @inventory[item]
     else
       0
     end
@@ -21,6 +21,14 @@ class Vendor
     else
       @inventory[item] = amount
     end
+  end
+
+  def potential_revenue
+    one = @inventory.map do |item|
+      item_price_float = item[0].price.delete("$").to_f
+      pot_rev = item[1] * item_price_float
+    end
+    one.sum
   end
 
 end
